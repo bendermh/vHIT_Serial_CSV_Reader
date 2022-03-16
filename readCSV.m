@@ -48,7 +48,7 @@ while ischar(nline)
         %VORS
     end
     
-    if strcmp(nline,'Test Type;Head Impulse Lateral')
+    if strcmp(nline,'Test Type;Head Impulse Lateral')||strcmp(nline,'Tipo de Prueba;Head Impulse Lateral')
         %vHIT Lateral
         numberHIT = numberHIT + 1;
         if numberHIT == testN
@@ -84,7 +84,7 @@ while loopEnd
     nline = fgetl(readFile);
     if ~isempty(nline)
         cutLine = strsplit(nline,';');
-        if strcmp (cutLine{1},'Impulse 1')
+        if strcmp (cutLine{1},'Impulse 1')||strcmp (cutLine{1},'Impulso 1')
             hitLines = string(nline);
             while ~isempty(nline)
                 nline = fgetl(readFile);
@@ -115,10 +115,10 @@ while actualLine < s
     rawLine = hitLines(actualLine);
     sectorLine = strsplit(rawLine,';');
     wordFist = strsplit(sectorLine{1}," ");
-    if strcmp(wordFist{1},'Impulse')
+    if strcmp(wordFist{1},'Impulse')||strcmp(wordFist{1},'Impulso')
         side = sectorLine{3};
     end
-    if strcmp(sectorLine{2},'Gain')
+    if strcmp(sectorLine{2},'Gain')||strcmp(sectorLine{2},'Ganancia')
         rawGain = sectorLine{3};
         %decimal , to . conversion
         if contains(rawGain, ',')
@@ -131,7 +131,7 @@ while actualLine < s
         %some files has one extra line !!! shit programming GN
         preCheck = hitLines(actualLine);
         preCheckEye = strsplit(preCheck,';');
-        if strcmp(preCheckEye{2},'Head')
+        if strcmp(preCheckEye{2},'Head')||strcmp(preCheckEye{2},'Cabeza')
             actualLine = actualLine-1;
         end
         rawEye = hitLines(actualLine);
@@ -141,7 +141,7 @@ while actualLine < s
         rawDeleted = hitLines(actualLine);
         preDeleted = strsplit(rawDeleted,';');
         isDeleted = preDeleted{3};
-        if strcmp(side,'Left')
+        if strcmp(side,'Left')||strcmp(side,'Izquierda')
             if strcmp(isDeleted,"No")
                 gainL = vertcat(gainL,preGain);
             end
